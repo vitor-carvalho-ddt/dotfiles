@@ -76,13 +76,24 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-    -- Configure language servers
+    -- Update your servers table
     local servers = {
       lua_ls = {
         settings = {
           Lua = {
             completion = {
               callSnippet = 'Replace',
+            },
+          },
+        },
+      },
+      phpactor = {
+        -- phpactor settings (optional)
+        settings = {
+          phpactor = {
+            -- Enable/disable specific features
+            completion = {
+              insertUseStatements = true,
             },
           },
         },
@@ -95,6 +106,8 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
+      'phpactor',
+      'php-cs-fixer',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
