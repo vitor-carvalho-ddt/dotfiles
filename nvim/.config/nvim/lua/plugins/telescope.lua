@@ -45,7 +45,6 @@ return {
     vim.keymap.set('n', '<leader><leader>', function()
       require('telescope.builtin').buffers { previewer = true }
     end, { desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[ ] Live Grep current project' })
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzy Find current Buffer' })
 
     vim.keymap.set('n', '<leader>s/', function()
