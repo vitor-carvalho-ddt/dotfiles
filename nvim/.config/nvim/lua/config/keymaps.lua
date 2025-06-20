@@ -17,6 +17,9 @@ vim.keymap.set('n', '<leader>crfp', function()
   print('Copied path: ' .. path)
 end, { desc = 'Copy relative file path' })
 
+-- Delete withou copying to buffer
+vim.keymap.set('v', '<leader>da', '"_d', { desc = '[D]elete [A]ll without saving to paste buffer' })
+
 -- MAPPING REDO
 vim.keymap.set('n', '<C-r>', ':redo<CR>', { desc = 'Redo an action' })
 
