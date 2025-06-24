@@ -98,16 +98,38 @@ return {
           },
         },
       },
+      -- TypeScript LSP
+      tsserver = {
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+        },
+      },
+      -- ESLint LSP (provides diagnostics and code actions)
+      eslint = {
+        settings = {
+          workingDirectories = { mode = 'auto' },
+        },
+      },
     }
 
     -- Setup mason and ensure tools are installed
     require('mason').setup()
 
-    local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_installed = {}
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
       'phpactor',
       'php-cs-fixer',
+      'eslint_d',
+      'prettier',
+      'typescript-language-server',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
