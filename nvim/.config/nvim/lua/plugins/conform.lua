@@ -44,5 +44,13 @@ return {
       ['css'] = { 'prettier' },
       ['html'] = { 'prettier' },
     },
+    formatters = {
+      prettier = {
+        -- Use local project prettier, if not, fallback to Mason
+        command = './node_modules/.bin/prettier',
+        args = { '--stdin-filepath', '$FILENAME' },
+        stdin = true,
+      },
+    },
   },
 }
