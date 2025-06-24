@@ -35,7 +35,9 @@ return {
       php = { 'pint' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      -- javascript = { ' prettier', stop_after_first = true },
+      javascript = { 'prettier', stop_after_first = true },
+      typescript = { 'prettier', stop_after_first = true },
     },
   },
 }
