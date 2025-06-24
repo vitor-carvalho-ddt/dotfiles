@@ -99,7 +99,7 @@ return {
         },
       },
       -- TypeScript LSP
-      tsserver = {
+      ts_ls = {
         settings = {
           typescript = {
             inlayHints = {
