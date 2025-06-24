@@ -113,6 +113,8 @@ return {
       },
       -- ESLint LSP (provides diagnostics and code actions)
       eslint = {
+        cmd = vim.fn.executable './node_modules/.bin/eslint' == 1 and { './node_modules/.bin/eslint', '--lsp' }
+          or { 'vscode-eslint-language-server', '--stdio' },
         settings = {
           workingDirectories = { mode = 'auto' },
         },
