@@ -38,11 +38,11 @@ return {
       -- javascript = { ' prettier', stop_after_first = true },
       javascript = { 'prettier', stop_after_first = true },
       typescript = { 'prettier', stop_after_first = true },
-      ['javascriptreact'] = { 'prettier' },
-      ['typescriptreact'] = { 'prettier' },
-      ['json'] = { 'prettier' },
-      ['css'] = { 'prettier' },
-      ['html'] = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescriptreact = { 'prettier' },
+      json = { 'prettier' },
+      css = { 'prettier' },
+      html = { 'prettier' },
     },
     formatters = {
       prettier = {
