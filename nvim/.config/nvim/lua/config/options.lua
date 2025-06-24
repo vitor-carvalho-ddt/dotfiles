@@ -3,6 +3,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
+-- Autoreload file
+vim.opt.autoread = true
+
 -- Settings
 vim.opt.wrap = false
 vim.opt.termguicolors = true
@@ -39,3 +42,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
