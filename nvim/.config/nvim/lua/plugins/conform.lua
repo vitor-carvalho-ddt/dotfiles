@@ -47,7 +47,7 @@ return {
     formatters = {
       prettier = {
         -- Use local project prettier, if not, fallback to Mason
-        command = './node_modules/.bin/prettier',
+        command = vim.fn.executable './node_modules/.bin/prettier' == 1 and './node_modules/.bin/prettier' or 'prettier', -- Falls back to Mason's prettier
         args = { '--stdin-filepath', '$FILENAME' },
         stdin = true,
       },
