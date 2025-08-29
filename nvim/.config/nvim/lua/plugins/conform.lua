@@ -44,13 +44,13 @@ return {
       css = { 'prettier' },
       html = { 'prettier' },
     },
-    formatters = {
-      prettier = {
-        -- Use local project prettier, if not, fallback to Mason
-        command = vim.fn.executable './node_modules/.bin/prettier' == 1 and './node_modules/.bin/prettier' or 'prettier', -- Falls back to Mason's prettier
-        args = { '--stdin-filepath', '$FILENAME' },
-        stdin = true,
-      },
-    },
+    -- formatters = {
+    --   prettier = {
+    --     -- Use local project prettier, if not, fallback to Mason
+    --     command = vim.fn.executable './node_modules/.bin/prettier' == 1 and './node_modules/.bin/prettier' or 'prettier', -- Falls back to Mason's prettier
+    --     args = { '--stdin-filepath', '$FILENAME' },
+    --     stdin = true,
+    --   },
+    -- },
   },
 }
