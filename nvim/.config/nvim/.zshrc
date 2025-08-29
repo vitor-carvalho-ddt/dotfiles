@@ -25,6 +25,8 @@ alias gl="git log"
 alias gau="git add -u"
 alias gc="git commit"
 alias gsiu="git stash --include-untracked"
+# misc
+alias c="clear"
 
 # NeoVim
 export PATH="$HOME/nvim-macos-arm64/bin:$PATH"
