@@ -27,6 +27,8 @@ alias gc="git commit"
 alias gsiu="git stash --include-untracked"
 # misc
 alias c="clear"
+alias lzd="lazydocker"
+alias lzg="lazigit"
 
 # NeoVim
 export PATH="$HOME/nvim-macos-arm64/bin:$PATH"
