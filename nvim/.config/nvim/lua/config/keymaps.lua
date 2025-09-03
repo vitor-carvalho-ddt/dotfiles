@@ -32,6 +32,15 @@ vim.keymap.set('n', '<S-k>', ':m .-2<CR>==', { desc = 'Move current line Up' })
 -- MOVE LINE DOWN
 vim.keymap.set('n', '<S-j>', ':m .+1<CR>==', { desc = 'Move current line Down' })
 
+-- CLOSE CURRENT TAB
+vim.keymap.set('n', '<leader>tc', ':tabc<CR>', { desc = '[T]ab [C]lose' })
+-- CLOSE OTHER TABS
+vim.keymap.set('n', '<leader>to', ':tabo<CR>', { desc = '[T]ab [O]nly (Close all other tabs)' })
+-- NEXT TAB
+vim.keymap.set('n', '<leader>tn', ':tabn<CR>', { desc = '[T]ab [N]ext' })
+-- PREVIOUS TAB
+vim.keymap.set('n', '<leader>tp', ':tabp<CR>', { desc = '[T]ab [P]revious' })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -43,6 +52,9 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Neogit keymap
+vim.keymap.set('n', '<leader>ng', ':Neogit<CR>', { desc = 'Open [N]eo[G]it' })
 
 -- Load Avante keymaps
 require('config.avante_keymaps').setup()
