@@ -1,4 +1,4 @@
--- Main LSP Configuration
+-- Main LSP Configuration to work with autoformat on save and proper syntax highlight
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
@@ -119,6 +119,13 @@ return {
           workingDirectories = { mode = 'auto' },
         },
       },
+      prismals = {
+        settings = {
+          prisma = {
+            prismaFmtBinPath = 'prisma-fmt',
+          },
+        },
+      },
     }
 
     -- Setup mason and ensure tools are installed
@@ -132,6 +139,7 @@ return {
       'eslint_d',
       'prettier',
       'typescript-language-server',
+      'prisma-language-server', -- Prisma LSP
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

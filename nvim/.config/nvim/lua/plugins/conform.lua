@@ -43,6 +43,7 @@ return {
       json = { 'prettier' },
       css = { 'prettier' },
       html = { 'prettier' },
+      prisma = { 'prisma-fmt' },
     },
     -- formatters = {
     --   prettier = {

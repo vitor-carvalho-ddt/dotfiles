@@ -5,6 +5,33 @@ return {
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   opts = {
     indent = { enable = true, disable = { 'ruby' } },
+    ensure_installed = {
+      'bash',
+      'c',
+      'diff',
+      'html',
+      'javascript',
+      'jsdoc',
+      'json',
+      'jsonc',
+      'lua',
+      'luadoc',
+      'luap',
+      'markdown',
+      'markdown_inline',
+      'php',
+      'prisma',
+      'python',
+      'query',
+      'regex',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'xml',
+      'yaml',
+    },
     highlight = {
       enable = true,
       -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules
