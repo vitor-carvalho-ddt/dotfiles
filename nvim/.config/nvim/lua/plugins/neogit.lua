@@ -10,6 +10,9 @@ return {
     -- 'echasnovski/mini.pick', -- optional
     -- 'folke/snacks.nvim', -- optional
   },
+  keys = {
+    { '<leader>ng', ':Neogit<CR>', desc = '[N]eo[G]it' },
+  },
   config = function()
     local neogit = require 'neogit'
     neogit.setup {
