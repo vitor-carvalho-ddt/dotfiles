@@ -1,6 +1,7 @@
 -- Buffer delete without closing window
 return {
   'famiu/bufdelete.nvim',
+  event = 'VeryLazy',
   keys = {
     {
       '<leader>bd',

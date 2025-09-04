@@ -11,7 +11,7 @@ return {
     -- 'folke/snacks.nvim', -- optional
   },
   keys = {
-    { '<leader>ng', ':Neogit<CR>', desc = '[N]eo[G]it' },
+    { mode = 'n', '<leader>ng', ':Neogit<CR>', desc = '[N]eo[G]it' },
   },
   config = function()
     local neogit = require 'neogit'
