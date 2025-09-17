@@ -63,6 +63,6 @@ return {
     { '=P', '<Plug>(YankyPutBeforeFilter)', mode = 'n', desc = 'Put before applying a filter' },
 
     -- Yank History Picker (optional, if using snacks/telescope)
-    { '<leader>p', '<cmd>YankyRingHistory<cr>', mode = { 'n', 'x' }, desc = 'Open Yank History' },
+    { '<leader>py', '<cmd>YankyRingHistory<cr>', mode = { 'n', 'x' }, desc = 'Open Yank History' },
   },
 }

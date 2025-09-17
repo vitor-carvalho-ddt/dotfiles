@@ -2,22 +2,15 @@
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    -- Required dependency for nvim-dap-ui
-    { 'nvim-neotest/nvim-nio' },
-
     -- Creates a beautiful debugger UI
-    { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
-
-    -- Installs the debug adapters for you
-    'williamboman/mason.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
-
-    -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- nvim-dap-ui depends on nvim-dap
+    'https://github.com/nvim-neotest/nvim-nio',
+    'rcarriga/nvim-dap-ui',
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    local utils = require 'dap.utils'
 
     -- Set up UI
     dapui.setup()
@@ -33,6 +26,39 @@ return {
       dapui.close()
     end
 
+    -- typescript
+    dap.adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'node',
+        args = { os.getenv 'HOME' .. '/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js', '${port}' },
+      },
+    }
+
+    -- Attach to Nest (start:debug)
+    local attach_server = {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Attach Nest (9229)',
+      port = 9229,
+      cwd = '${workspaceFolder}',
+      sourceMaps = true,
+      resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
+      skipFiles = { '<node_internals>/**' },
+      autoAttachChildProcesses = true, -- survives Nest watch restarts
+      restart = true, -- reconnect on restart
+      attachTimeoutMs = 10000,
+      console = 'integratedTerminal',
+    }
+
+    local attach_jest = vim.deepcopy(attach_server)
+    attach_jest.name = 'Attach Jest (9229)'
+
+    dap.configurations.typescript = { attach_server, attach_jest }
+    dap.configurations.javascript = dap.configurations.typescript
+
     -- Set up keymaps for debugging
     vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = 'Debug: [T]oggle Breakpoint' })
     vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: [C]ontinue' })
@@ -46,14 +72,5 @@ return {
       dap.terminate()
       dapui.close()
     end, { desc = 'Debug: Terminate/E[x]it' })
-
-    -- Install debug adapters automatically
-    require('mason-nvim-dap').setup {
-      automatic_installation = true,
-      ensure_installed = {
-        -- Add the languages you use
-        'lua',
-      },
-    }
   end,
 }
