@@ -46,7 +46,7 @@ return {
       cwd = '${workspaceFolder}',
       sourceMaps = true,
       resolveSourceMapLocations = { '${workspaceFolder}/**', '!**/node_modules/**' },
-      skipFiles = { '<node_internals>/**' },
+      -- skipFiles = { '<node_internals>/**' },
       autoAttachChildProcesses = true, -- survives Nest watch restarts
       restart = true, -- reconnect on restart
       attachTimeoutMs = 10000,
@@ -59,11 +59,31 @@ return {
     dap.configurations.typescript = { attach_server, attach_jest }
     dap.configurations.javascript = dap.configurations.typescript
 
+    local function VKSN(map, func, description)
+      vim.keymap.set('n', map, func, { desc = description })
+    end
+
+    VKSN('<leader>ll', function()
+      vim.cmd 'w'
+      vim.cmd 'so'
+    end, 'save file and sources to vim')
+
+    -- DEBUGGER KEYMAPS
+    VKSN('l', function()
+      dap.step_into()
+    end, 'Step Into')
+    VKSN('L', function()
+      dap.step_out()
+    end, 'Step Out')
+    VKSN('k', function()
+      dap.step_over()
+    end, 'Step Over')
+
     -- Set up keymaps for debugging
     vim.keymap.set('n', '<leader>dt', dap.toggle_breakpoint, { desc = 'Debug: [T]oggle Breakpoint' })
     vim.keymap.set('n', '<leader>dc', dap.continue, { desc = 'Debug: [C]ontinue' })
-    vim.keymap.set('n', '<leader>di', dap.step_into, { desc = 'Debug: Step [I]nto' })
-    vim.keymap.set('n', '<leader>do', dap.step_over, { desc = 'Debug: Step [O]ver' })
+    -- vim.keymap.set('n', '<leader>di', dap.step_into, { desc = 'Debug: Step [I]nto' })
+    -- vim.keymap.set('n', '<leader>do', dap.step_over, { desc = 'Debug: Step [O]ver' })
     vim.keymap.set('n', '<leader>dO', dap.step_out, { desc = 'Debug: Step [O]ut' })
     vim.keymap.set('n', '<leader>dr', dap.repl.toggle, { desc = 'Debug: Toggle [R]EPL' })
     vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = 'Debug: Run [L]ast' })
