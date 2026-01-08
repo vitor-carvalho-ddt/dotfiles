@@ -59,10 +59,21 @@ install_brew() {
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     elif [[ "$OS_TYPE" == "linux" ]]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        
+
         # Add Homebrew to PATH for Linux
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zprofile
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        local brew_bin
+        brew_bin="$(linuxbrew_brew_path)"
+        if [[ -n "$brew_bin" ]]; then
+            local shellenv_snippet="eval \"\$(${brew_bin} shellenv)\""
+            local zprofile="$HOME/.zprofile"
+            touch "$zprofile"
+            if ! grep -Fq "$shellenv_snippet" "$zprofile"; then
+                echo "$shellenv_snippet" >> "$zprofile"
+            fi
+            eval "$(${brew_bin} shellenv)"
+        else
+            log_warning "Unable to detect Linuxbrew path automatically; add it to your shell configuration manually."
+        fi
     fi
     log_success "Homebrew installed successfully"
 }
@@ -386,6 +397,17 @@ EOF
 
         log_success "Added tmux-session PATH snippet to ${shell_file/$HOME/~}"
     done
+}
+
+# Detect Linuxbrew bin path
+linuxbrew_brew_path() {
+    if [[ -x "$HOME/.linuxbrew/bin/brew" ]]; then
+        printf "%s\n" "$HOME/.linuxbrew/bin/brew"
+    elif [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+        printf "%s\n" "/home/linuxbrew/.linuxbrew/bin/brew"
+    else
+        printf "%s\n" ""
+    fi
 }
 
 # Display menu and get selection
