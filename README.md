@@ -90,6 +90,22 @@ ln -s ~/dotfiles/nvim/.config/nvim ~/.config/nvim
 ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 ```
 
+## Tmux Session Persistence
+
+Use the bundled helper at `tmux/bin/tmux-session` to snapshot and restore your tmux workspaces across reboots:
+
+```bash
+# Save every running tmux session (run before shutting down)
+~/dotfiles/tmux/bin/tmux-session save
+
+# Recreate the saved sessions, windows, panes, and layouts
+~/dotfiles/tmux/bin/tmux-session restore
+```
+
+Running `./install.sh` (option 1 or 12) automatically adds `~/dotfiles/tmux/bin` to your shell `PATH`, so you can simply run `tmux-session save`/`restore` from anywhere.
+
+By default state is stored in `~/.local/share/tmux/sessions/latest`; set `TMUX_SESSION_FILE=/path/to/file` if you want to keep multiple snapshots (e.g., per project). Run `tmux-session path` to see the current file or `tmux-session --help` for the full command reference.
+
 ## Requirements
 
 - **macOS**: Xcode Command Line Tools (`xcode-select --install`)

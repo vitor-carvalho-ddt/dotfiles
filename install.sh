@@ -326,6 +326,8 @@ link_tmux_config() {
     
     ln -sf "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
     log_success "Tmux configuration linked successfully"
+
+    ensure_tmux_session_path
 }
 
 # Setup Zsh aliases
@@ -358,6 +360,32 @@ alias nvc='nvim ~/.config/nvim'
 EOF
     
     log_success "Zsh aliases added to .zshrc"
+}
+
+# Ensure tmux-session helper is on PATH
+ensure_tmux_session_path() {
+    local bin_dir="$DOTFILES_DIR/tmux/bin"
+    local marker="# Added by dotfiles install script (tmux-session PATH)"
+    local shells=("$HOME/.zshrc" "$HOME/.bashrc")
+
+    for shell_file in "${shells[@]}"; do
+        [[ -n "$shell_file" ]] || continue
+        touch "$shell_file"
+
+        if grep -Fq "$marker" "$shell_file"; then
+            log_warning "tmux-session PATH already configured in ${shell_file/$HOME/~}"
+            continue
+        fi
+
+        cat >> "$shell_file" <<EOF
+$marker
+if [ -d "$bin_dir" ]; then
+    export PATH="$bin_dir:\$PATH"
+fi
+EOF
+
+        log_success "Added tmux-session PATH snippet to ${shell_file/$HOME/~}"
+    done
 }
 
 # Display menu and get selection
