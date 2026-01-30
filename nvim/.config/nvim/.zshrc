@@ -19,6 +19,7 @@ alias dcu="docker compose up -d"
 alias dcub="docker compose up -d --build"
 alias dcbnc="docker compose build --no-cache"
 alias dcd="docker compose down"
+alias openhands='docker run -d --rm --name openhands-app --add-host=host.docker.internal:host-gateway -p 3000:3000 -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.openhands.dev/openhands/runtime:latest-nikolaik -e LOG_ALL_EVENTS=true -v /var/run/docker.sock:/var/run/docker.sock -v ~/.openhands:/.openhands -v /home/clib/Workspace/OpenHands:/workspace docker.openhands.dev/openhands/openhands:latest'
 # git
 alias gs="git status"
 alias gl="git log"
