@@ -29,6 +29,7 @@ openhands() {
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v ~/.openhands:/.openhands \
     -v "$(pwd):/workspace" \
+    -v ~/.openhands/conversations:/workspace/conversations \
     docker.openhands.dev/openhands/openhands:latest
 }
 # git
