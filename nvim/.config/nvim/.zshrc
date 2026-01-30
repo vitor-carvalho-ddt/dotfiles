@@ -19,7 +19,6 @@ alias dcu="docker compose up -d"
 alias dcub="docker compose up -d --build"
 alias dcbnc="docker compose build --no-cache"
 alias dcd="docker compose down"
-unalias openhands 2>/dev/null
 # git
 alias gs="git status"
 alias gl="git log"
