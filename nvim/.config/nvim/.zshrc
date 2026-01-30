@@ -21,10 +21,11 @@ alias dcbnc="docker compose build --no-cache"
 alias dcd="docker compose down"
 openhands() {
   docker run -d --rm --name openhands-app \
-    --add-host=host.docker.internal:host-gateway \
-    -p 3000:3000 \
+    --network host \
     -e SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.openhands.dev/openhands/runtime:latest-nikolaik \
     -e LOG_ALL_EVENTS=true \
+    -e SANDBOX_USE_HOST_NETWORK=true \
+    -e DOCKER_HOST_ADDR=127.0.0.1 \
     -e "SANDBOX_VOLUMES=$(pwd):/workspace:rw" \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v ~/.openhands:/.openhands \
