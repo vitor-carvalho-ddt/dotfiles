@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+set -eu
+
+pane_target="${1-}"
+
+if ! command -v powershell.exe >/dev/null 2>&1; then
+  exit 0
+fi
+
+clipboard_text="$(
+  powershell.exe -NoProfile -Command "[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new(\$false); Get-Clipboard -Format Text -Raw" \
+    | tr -d '\r'
+)"
+
+# Exit quietly when there is no text content on the Windows clipboard.
+[ -n "$clipboard_text" ] || exit 0
+
+printf '%s' "$clipboard_text" | tmux load-buffer -b __wsl_paste__ -
+
+if [ -n "$pane_target" ]; then
+  tmux paste-buffer -d -p -b __wsl_paste__ -t "$pane_target"
+else
+  tmux paste-buffer -d -p -b __wsl_paste__
+fi
